@@ -1,0 +1,46 @@
+<h2 class="text-3xl font-bold pb-8 p-5">Mis Contactos</h2>
+<div class="pb-5 flex justify-end">
+	<button routerLink="/new" class="
+		bg-[#369b6a] 
+		hover:bg-[#3dce8f] 
+		hover:bg-opacity-60 
+		border border-[#3dce8f] 
+		text-white font-bold px-6 py-2 rounded-md
+	">
+		New Contact
+	</button>
+</div>
+<div class="overflow-x-auto">
+	<table class="w-full table-auto bg-[#222322] border border-[#2c2d2c] text-lg">
+		<thead>
+			<tr class="bg-[#222322]">
+				<th class="px-4 py-2">Id</th>
+				<th class="px-4 py-2">Name</th>
+				<th class="px-4 py-2">Email</th>
+				<th class="px-4 py-2">Created At</th>
+				<th class="px-4 py-2">Delete</th>
+			</tr>
+		</thead>
+		<tbody class="bg-[#222322]">
+			@for (contact of contacts; track contact.id) {
+			<tr class="bg-[#222322] border border-[#2c2d2c]">
+				<td class="py-2">{{ contact.id }}</td>
+				<td class="py-2">{{ contact.name }}</td>
+				<td class="py-2">{{ contact.email }}</td>
+				<td class="py-2">{{ contact.createdAt | date:'dd / MM / yyyy hh:mm a' }}</td>
+				<td class="py-2">
+					<button [routerLink]="[contact.id, 'edit']" type="button" class="bg-[#369b6a] hover:bg-[#3dce8f] 
+						hover:bg-opacity-60 
+						border border-[#3dce8f] text-white mr-2 py-1 px-7 rounded focus:outline-none focus:shadow-outline">
+						Edit
+					</button>
+					<button (click)="delete(contact)" type="button"
+						class="bg-[#281515] hover:bg-red-500 border border-[#832127] text-white font-bold py-1 px-8 rounded focus:outline-none focus:shadow-outline">
+						X
+					</button>
+				</td>
+			</tr>
+			}
+		</tbody>
+	</table>
+</div>

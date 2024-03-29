@@ -1,0 +1,50 @@
+<div class="flex flex-col justify-center items-center">
+	<h2 class="text-4xl mb-2">
+		@if (contact) {
+		Update
+		} @else {
+		New
+		} Contact
+	</h2>
+	@if (form) {
+	<form [formGroup]="form" (ngSubmit)="save()"
+		class="bg-[#222322] border border-[#2c2d2c] rounded px-8 pt-6 pb-8 mb-4 w-96">
+		<div class="mb-4 flex flex-col items-start">
+			<label class="block text-xl font-bold mb-2" for="Name">
+				Name
+			</label>
+			<input formControlName="name"
+				class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-[#3dce8f] focus:shadow-outline"
+				id="nombre" name="name" type="text" placeholder="Name" required>
+			@if(form.get('name')?.hasError('required') && form.get('name')?.touched) {
+			<p class="text-red-500 pt-1">Name is required</p>
+			}
+		</div>
+		<div class="mb-4 flex flex-col items-start">
+			<label class="block text-xl font-bold mb-2" for="email">
+				Email
+			</label>
+			<input formControlName="email"
+				class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-[#3dce8f] focus:shadow-outline"
+				id="email" name="email" type="email" placeholder="Email" required>
+			<!--Todo: Hacer que se rendericen los mensajes de error despues de clickar en los inputs y no de primeras -->
+			@if(form.get('email')?.hasError('required') && form.get('email')?.touched) {
+			<p class="text-red-500 pt-1">Email is required</p>
+			} @else if(form.get('email')?.hasError('pattern')) {
+			<p class="text-red-500 pt-1">Email not valid</p>
+			}
+		</div>
+		<div class="flex items-center justify-around">
+			<button
+				class="bg-[#369b6a] hover:bg-[#3dce8f] hover:bg-opacity-60 border border-[#3dce8f] text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+				type="submit">
+				Save
+			</button>
+			<button type="button" routerLink="/"
+				class="bg-[#281515] hover:bg-red-500 border border-[#832127] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+				Cancel
+			</button>
+		</div>
+	</form>
+	}
+</div>
